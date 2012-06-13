@@ -1,0 +1,55 @@
+#!/usr/bin/perl
+#This code is courtesy of Jeroen Stil.  It is part of the harness scripts that
+#run the modeller.
+
+use Env;
+
+
+#The number of times to run the simulated stack
+$N_stat=5000;
+
+#The arguments are the noise file, the minimum p0 to test, the maximum p0 to
+#test, and the steps in p0 to use.
+$filename=$ARGV[0]; shift(@ARGV);
+$p0_min=$ARGV[0]; shift(@ARGV);
+$p0_max=$ARGV[0]; shift(@ARGV);
+$dp0=$ARGV[0]; shift(@ARGV);
+
+
+#Start with the minimum p0
+$p0=$p0_min;
+
+#Check for zero/negative step size
+if ($dp0<=0)
+{
+  $dp0=0.1;
+}
+
+#Step through from the minimum p0 to the maximum p0
+while ($p0<=$p0_max)
+{
+  $outname=sprintf("$filename\_varp0_%8.6f_tst",$p0);
+
+  unless ( -e $outname )
+  {
+	  open(OUT,"> $outname");
+
+	  for ($i=0; $i<=($N_stat-1); $i++)
+	  {
+		#Run the simulated stack
+		$median_stack=`./stack_stat_varp0 $filename $p0 | awk '{print $2;}' | ~stil/perl/percentile 0.5 | grep 'Median'`;
+		chop($median_stack);
+
+		print OUT "$median_stack\n";
+
+	  }
+
+	  close(OUT);
+  }
+  $p0=$p0+$dp0;
+}
+
+
+
+
+

@@ -1,0 +1,47 @@
+#!/usr/bin/perl
+
+use Env;
+
+
+$N_stat=5000;
+#$N_stat=2000;
+
+$filename=$ARGV[0]; shift(@ARGV);
+$p0_min=$ARGV[0]; shift(@ARGV);
+$p0_max=$ARGV[0]; shift(@ARGV);
+$dp0=$ARGV[0]; shift(@ARGV);
+
+
+$p0=$p0_min;
+
+if ($dp0<=0)
+{
+  $dp0=0.1;
+}
+
+while ($p0<=$p0_max)
+{
+  $outname=sprintf("$filename\_varp0_%8.6f_tst",$p0);
+
+  unless ( -e $outname )
+  {
+	  open(OUT,"> $outname");
+
+	  for ($i=0; $i<=($N_stat-1); $i++)
+	  {
+		$median_stack=`./stack_stat_varp0 $filename $p0 | ~stil/perl/onecol 2 | ~stil/perl/percentile 0.5 | grep 'Median'`;
+		chop($median_stack);
+
+		print OUT "$median_stack\n";
+
+	  }
+
+	  close(OUT);
+  }
+  $p0=$p0+$dp0;
+}
+
+
+
+
+
