@@ -346,9 +346,14 @@ if __name__ == "__main__":
 	stacking")
 	parser.add_option("-f", action="store", type="string", dest="fakesource",
 	help="Seed a Gaussian at the source location (Use format 'Peak FWHM Dist')")
+	parser.add_option("-i", action="store", type="string", dest="imglist",
+	help="Stack using the list of images stored in this file")
 	# Store the CLI arguments for use in other functions
 	(options, args) = parser.parse_args()
-	if len(args) < 3:
+	if len(args) < 3 and options.imglist == None:
+		print "insufficient arguments.  Use --help for options"
+		exit(1)
+	else if len(args) < 2:
 		print "insufficient arguments.  Use --help for options"
 		exit(1)
 	if path.exists(args[0].split('/')[-1] + args[1].split('/')[-1] + 
@@ -377,7 +382,11 @@ if __name__ == "__main__":
 	percent = 0.0
 	fraction = 1.0 / len(RA)
 	#args[1:-1] are all of the source images
-	for arg in args[1:-1]:
+	if options.imglist == None:
+		imglist = args[1:-1]
+	else:
+		imglist = open(options.imglist).readlines()
+	for arg in imglist:
 		rejects = []
 		try:
 			image = pyfits.open(arg)
