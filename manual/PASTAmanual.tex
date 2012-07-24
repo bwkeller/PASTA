@@ -211,6 +211,11 @@ done to the individual stamps before stacking, and the what files to output.
 	\item[-s] Save to disk each stamp used in the stack WARNING: Using 
 	regridding will cause the astrometry to be incorrect on these saved stamps
 	\item[-a] Do not save the annotation file
+	\item[-i imagelist] Read in an ASCII file 'imagelist' containing the 
+	filenames of the images to be stacked (one file per line). This is
+	useful if you have a large number of files to read, and the command line
+	can't handle them all.  With this, you don't need 
+	\verb!source_image.fits!
 	\item[-p n] Also save a FITS file containing the $n$th percentile valued 
 	pixels of the stack.
 	\item[-d] Similar to the previous option, this option will dump a number of
