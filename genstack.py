@@ -353,7 +353,7 @@ if __name__ == "__main__":
 	if len(args) < 3 and options.imglist == None:
 		print "insufficient arguments.  Use --help for options"
 		exit(1)
-	else if len(args) < 2:
+	elif len(args) < 2:
 		print "insufficient arguments.  Use --help for options"
 		exit(1)
 	if path.exists(args[0].split('/')[-1] + args[1].split('/')[-1] + 
