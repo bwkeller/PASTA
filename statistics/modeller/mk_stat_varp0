@@ -37,10 +37,17 @@ while ($p0<=$p0_max)
 	  for ($i=0; $i<=($N_stat-1); $i++)
 	  {
 		#Run the simulated stack
-		$median_stack=`./stack_stat_varp0 $filename $p0 | awk '{print $2;}' | ~stil/perl/percentile 0.5 | grep 'Median'`;
-		chop($median_stack);
-
-		print OUT "$median_stack\n";
+		$raw_stack=`./stack_stat_varp0 $filename $p0`;
+		@stack=split '\n', $raw_stack;
+		for my $line (@stack) 
+		{
+			@tmp = split '\s+', $line;
+			$line = @tmp[1];
+		}
+		@sort_stack=sort {$a <=> $b} @stack;
+		$median_index=int(0.5*$#sort_stack+0.5);
+		$median_value=$sort_stack[$median_index];
+		print "Median = $median_value\n";
 
 	  }
 
