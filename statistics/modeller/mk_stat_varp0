@@ -42,12 +42,12 @@ while ($p0<=$p0_max)
 		for my $line (@stack) 
 		{
 			@tmp = split '\s+', $line;
-			$line = @tmp[1];
+			$line = @tmp[2];
 		}
 		@sort_stack=sort {$a <=> $b} @stack;
 		$median_index=int(0.5*$#sort_stack+0.5);
 		$median_value=$sort_stack[$median_index];
-		print "Median = $median_value\n";
+		print OUT "Median = $median_value\n";
 
 	  }
 
