@@ -29,7 +29,7 @@ distributions.
 
 * [Python 2.4+](http://www.python.org)
 * [Numpy 1.2.0+](http://numpy.scipy.org)
-* [PyFITS 2.3+[(http://www.stsci.edu/resources/software\_hardware/pyfits)
+* [PyFITS 2.3+](http://www.stsci.edu/resources/software\_hardware/pyfits)
 * [Scipy 0.7.0+](http://www.scipy.org)
 * [astLib 0.3.1+](http://astlib.sourceforge.net)
 
