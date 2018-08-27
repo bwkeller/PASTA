@@ -13,8 +13,10 @@
 
 \begin{document}
 \title{Python Astronomical Stacking Tool Array (PASTA) Manual}
-\author{Ben Keller \\ Institute for Space Imaging Science\\
-University of Calgary \\ bwkeller@ucalgary.ca}
+\author{BW Keller \\ Astronomisches Rechen-Institut
+\\ Universit\"at Heidelberg \\ kellerbw@mcmaster.ca \\ \\ 
+Jeroen Stil \\ University
+of Calgary \\ jstil@ucalgary.ca}
 \maketitle
 \begin{center}
 \includegraphics[scale=5]{PASTA_logo.eps}
@@ -48,10 +50,11 @@ the mean pixels.
 Stacking allows the reduction of noise levels in the examination of sets of 
 images.  It produces a pseudo-source consisting of the median of all the stacked
 sources, with reduced background noise level.  For more information on the 
-performance of stacking, see \cite[Stil et al. 2010]{stil2010}.
+performance of stacking, see \cite[Stil et al. 2014]{stil2014}.
 
 \subsection{Where To Obtain PASTA}
-Ask Ben \emph{really} nicely.
+PASTA is hosted on github
+\hyperref[https://github.com/bwkeller/PASTA](https://github.com/bwkeller/PASTA).
 
 \section{Software Requirements}
 PASTA uses a number of libraries to be installed prior to running.  Most of these
@@ -413,7 +416,7 @@ distribution is used.
 The included noise distribution used with the modellers was determined 
 empirically from the NVSS survey images.  By masking out sources, the background
 of the image was determined, and then a distribution consisting of the sum of a
-Gaussian and exponential \cite[Stil et. al 2010]{stil2010} was fit to the 
+Gaussian and exponential \cite[Stil et al. 2014]{stil2014} was fit to the 
 resulting intensity distribution.  As the noise levels, as well as 
 artifacts/systematics, of different survey images will be different, this 
 likely will need to be re-done for each different image survey set used.
@@ -731,10 +734,17 @@ described as follows:
 Stokes \emph{I} Intensity}
 \end{figure}
 
+\section{Acknowledgements}
+PASTA was written by BW Keller, with scientific guidance from Jeroen Stil.  This
+work was supported by an Discovery Grant from the Natural Sciences and
+Engineering Research Council to Jeroen Stil.
+
 
 \renewcommand{\refname}{\section{References}}
 \begin{thebibliography}{1}
-\bibitem{stil2010} The Stacking Paper
+\bibitem{stil2014} 
+    Stil, J. M., Keller, B. W., George, S. J., Taylor, A. R.: 2014
+        \emph{The Astrophysical Journal} {\bf 787} 99
 \bibitem{NVSS1998}
 	Condon, J. J., Cotton, W. D., Greisen, E. W., Yin, Q. F., 
 	Perley, R. A., Taylor, G. B., Broderick, J. J.: 1998

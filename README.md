@@ -1,6 +1,6 @@
 Python Astronomical Stacking Tool Array: PASTA
 ==============================================
-##Introduction
+## Introduction
 PASTA is a software package written in the Python programming language for median
 stacking of astronomical sources.  It includes a number of features for 
 filtering sources, outputting stack statistics, generating Karma annotations, 
@@ -22,7 +22,7 @@ images.  It produces a pseudo-source consisting of the median of all the stacked
 sources, with reduced background noise level.  For more information on the 
 performance of stacking, see Stil et al. 2010.
 
-##Software Requirements
+## Software Requirements
 PASTA uses a number of libraries to be installed prior to running.  Most of these
 packages are available in the software repositories of the main Linux 
 distributions.
@@ -33,5 +33,10 @@ distributions.
 * [Scipy 0.7.0+](http://www.scipy.org)
 * [astLib 0.3.1+](http://astlib.sourceforge.net)
 
-##Using PASTA
+## Using PASTA
 For more details on how to build/use pasta, see the manual.
+
+## Acknowledgements
+PASTA was written by BW Keller, with scientific guidance from Jeroen Stil.  This
+work was supported by an Discovery Grant from the Natural Sciences and
+Engineering Research Council to Jeroen Stil.
