@@ -267,7 +267,7 @@ class Stampy:
 		try:
 			return np.sqrt(np.sum(np.concatenate((a, b, c, d))) / (bsize - 1))
 		except: 
-			print "Error with source @ "+self.header["radec"]
+			print("Error with source @ "+self.header["radec"])
 
 	def regrid(self, factor):
 		"""

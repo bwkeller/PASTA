@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # genstack.py is the primary script of the PAST suite.  genstack takes an input 
 # sourcelist and one or more FITS files containing the sources, and generates
@@ -85,7 +85,7 @@ def extract_data(filename, ra, dec, intense):
 			RA.append(float(i.split()[ra]))
 			Dec.append(float(i.split()[dec]))
 			Intense.append(i.split()[intense])
-	print "Done reading infile"
+	print("Done reading infile")
 
 def name_string(ra, dec):
 	"""
@@ -351,15 +351,15 @@ if __name__ == "__main__":
 	# Store the CLI arguments for use in other functions
 	(options, args) = parser.parse_args()
 	if len(args) < 3 and options.imglist == None:
-		print "insufficient arguments.  Use --help for options"
+		print("insufficient arguments.  Use --help for options")
 		exit(1)
 	elif len(args) < 2:
-		print "insufficient arguments.  Use --help for options"
+		print("insufficient arguments.  Use --help for options")
 		exit(1)
 	if path.exists(args[0].split('/')[-1] + args[1].split('/')[-1] + 
 	"_mean.fits") or path.exists(args[0].split('/')[-1] + 
 	args[1].split('/')[-1] + "_median.fits"):
-		print "outfiles already exists!"
+		print("outfiles already exists!")
 		exit(1)
 	#Default columns for input list
 	if options.locations == None:
@@ -429,7 +429,7 @@ if __name__ == "__main__":
 						{'P':percent * 100} + "%" + "\r")
 						stdout.flush()
 		except IOError:
-			print arg + " failed to load"
+			print(arg + " failed to load")
 			#exit(2)
 		# This loop is used to throw out stamps already used, 
 		# to prevent any duplication across images that overlap
@@ -441,7 +441,7 @@ if __name__ == "__main__":
 	try:
 		save_stacks(args[0].split('/')[-1] + args[1].split('/')[-1])
 	except AttributeError:
-		print "No Sources accepted for stack.  No images will be generated."
+		print("No Sources accepted for stack.  No images will be generated.")
 	if options.percentile != None:
 		#Write out the percentile stacks
 		save_percentile(args[0].split('/')[-1] + args[1].split('/')[-1], 
