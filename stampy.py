@@ -110,8 +110,8 @@ class Stampy:
                         self.header["offset"] = [pixcentre[0] -
                             int(round(pixcentre[0])),  pixcentre[1] -
                             int(round(pixcentre[1]))]
-                        self.data = source[int(pixcentre[0]-dimensions/2):int(pixcentre[0]+dimensions/2), 
-                                int(pixcentre[1]-dimensions/2):int(pixcentre[1]+dimensions/2)]
+                        self.data = source[int(round(pixcentre[1]-dimensions/2.)):int(round(pixcentre[1]+dimensions/2.)), 
+                                int(round(pixcentre[0]-dimensions/2.)):int(round(pixcentre[0]+dimensions/2.))]
                 #Once again, the astWCS methods are quite slow, disable them by default.
                 if savewcs == True:     #generate a new WCS
                         wcsdimensions = dimensions * fitswcs.getPixelSizeDeg()
