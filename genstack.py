@@ -26,18 +26,6 @@ from os import path
 from optparse import OptionParser
 
 import numpy as np
-from scipy import ndimage
-from numpy import where
-from numpy import append
-from numpy import minimum
-from numpy import median
-from numpy import power
-from numpy import isnan
-from numpy import array
-from numpy import maximum
-from numpy import concatenate
-from numpy import apply_along_axis
-from numpy import random
 
 from astropy import wcs
 from astropy.io import fits
@@ -178,7 +166,7 @@ def stack_build(image, size, ra, dec, intense, mywcs, scale, save, maxnoise,
         if fakesource is not None and stamp.header['flag']['error_flag'] == 'a':
                 #The peaks will be uniformly distributed between 0 and 2*peak
                 if fakesource.split()[-1] == 'u':
-                        stamp.add_fakesource(random.uniform(high = 
+                        stamp.add_fakesource(np.random.uniform(high = 
                         2.0*float(fakesource.split()[0])), float(fakesource.split()[1]))
                 #The peaks will all be set to the input peak value (delta distribution)
                 if fakesource.split()[-1] == 'd':
@@ -231,8 +219,8 @@ def headerize(image):
                                                         image[0].header['CDELT2'], '')
         # These lines are used to scale the image, as some software can only handle
         # int values for the data array
-        min = minimum.reduce(minimum.reduce(image[0].data)) 
-        max = maximum.reduce(maximum.reduce(image[0].data)) 
+        min = np.minimum.reduce(np.minimum.reduce(image[0].data)) 
+        max = np.maximum.reduce(np.maximum.reduce(image[0].data)) 
         # These lines are needed to prevent the lowest intensity pixels from being 
         # blanks
         min = min - (scalingfactor * abs(min))
@@ -284,7 +272,7 @@ def save_noise(file, ann, stamp, intensity, reject):
         # NaN, we set it to 0
         try:
                 cp = stamp.data[int(stamp.data.shape[0] / 2)][int(stamp.data.shape[1] / 2)]
-                if isnan(cp):
+                if np.isnan(cp):
                         cp = 0
         except IndexError:
                 cp = 0

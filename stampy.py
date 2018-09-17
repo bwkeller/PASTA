@@ -104,7 +104,6 @@ class Stampy:
                         source = fitsfile[0].data[0][0]
                 #pixcentre is the central pixel of the source
                 pixcentre = fitswcs.wcs_world2pix(np.atleast_2d(location), 0, ra_dec_order=True)[0]
-                print(location, pixcentre)
                 if pixcentre[0] < 0 or pixcentre[1] < 0 or np.any(np.isnan(pixcentre)):
                         self.data = np.array([])
                 else:
