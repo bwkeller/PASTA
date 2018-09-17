@@ -27,11 +27,10 @@ PASTA uses a number of libraries to be installed prior to running.  Most of thes
 packages are available in the software repositories of the main Linux 
 distributions.
 
-* [Python 2.4+](http://www.python.org)
-* [Numpy 1.2.0+](http://numpy.scipy.org)
-* [PyFITS 2.3+](http://www.stsci.edu/resources/software\_hardware/pyfits)
+* [Python 3.4+](http://www.python.org)
+* [Numpy 1.7.0+](http://numpy.scipy.org)
 * [Scipy 0.7.0+](http://www.scipy.org)
-* [astLib 0.3.1+](http://astlib.sourceforge.net)
+* [astropy 3.0.+](http://astropy.org)
 
 ## Using PASTA
 For more details on how to build/use pasta, see the manual.
