@@ -22,6 +22,8 @@ import math
 
 import numpy as np
 from scipy import ndimage
+from astropy.coordinates import SkyCoord
+from astropy.io import fits
 from math import sqrt
 
 class Heady(dict):
@@ -75,7 +77,7 @@ class Stampy:
                                                 (B1950 or J2000)
         @type maxnoise:         number
         @param maxnoise:        The maximum noise before the noise flag is flipped.
-        @type fitswcs:          AstWCS.WCS
+        @type fitswcs:          WCS Object
         @param fitswcs:         The WCS for the input fitsfile
         @type savewcs:          boolean
         @param savewcs:         Whether or not to generate a new WCS for the stamp
@@ -87,15 +89,14 @@ class Stampy:
                 #pull out the FITS header from the given file
                 self.fitsheader = fitsfile[0].header
                 self.header['units'] = self.fitsheader['BUNIT']
-                #The reason for the fitswcs argument is the astWCS.WCS method is
+                #The reason for the fitswcs argument is the WCS method is
                 #VERY SLOW.
                 #generate a new WCS for the stamp if one isn't given
                 if fitswcs is None:
-                        fitswcs = wcs.WCS(self.fitsheader, mode="pyfits")
+                        raise DeprecationWarning
                 self.header["radec"] = location
                 if galcoords:
-                        self.header["galcoords"] = astCoords.convertCoords(epoch, 
-                        "GALACTIC", location[0], location[1], fitswcs.getEpoch())
+                        self.header["galcoords"] = SkyCoord(ra=location[0], dec=location[1], frame='icrs').galactic
                 #This is the ndarray to pull the stamp from
                 source = fitsfile[0].data
                 #This check is needed for some odd fits files
@@ -112,12 +113,9 @@ class Stampy:
                             int(round(pixcentre[1]))]
                         self.data = source[int(round(pixcentre[1]-dimensions/2.)):int(round(pixcentre[1]+dimensions/2.)), 
                                 int(round(pixcentre[0]-dimensions/2.)):int(round(pixcentre[0]+dimensions/2.))]
-                #Once again, the astWCS methods are quite slow, disable them by default.
+                #Once again, the WCS methods are quite slow, disable them by default.
                 if savewcs == True:     #generate a new WCS
-                        wcsdimensions = dimensions * fitswcs.getPixelSizeDeg()
-                        clip = astImages.clipImageSectionWCS(source, fitswcs,
-                                location[0], location[1], wcsdimensions)
-                        self.fitswcs = clip['wcs']
+                        raise DeprecationWarning
                 else:
                         self.fitswcs = None
                 #compute_rms does not work on 0 sized images
@@ -175,11 +173,8 @@ class Stampy:
                 @type filename:         string
                 @param filename:        The filename to save the FITS file as
                 """
-                sliceWCS = self.fitswcs
-                sliceWCS.header.update("DATAMIN", np.min(self.data))
-                sliceWCS.header.update("DATAMAX", np.max(self.data))
-                sliceWCS.updateFromHeader()
-                astImages.saveFITS(filename + ".fits", self.data, sliceWCS)
+                hdu = fits.PrimaryHDU(self.data)
+                hdu.writeto(filename + ".fits")
 
         def compute_bmedian(self, bpercent=20):
                 """
@@ -289,7 +284,7 @@ class Stampy:
 
         def scale(self, factor):
                 """
-                This method is used to scale the image stamp using cubic splines in astLib.
+                This method is used to scale the image stamp using cubic splines
                 @type factor:           number or (number,number)
                 @param factor:          the factor to scale the image by
                 """

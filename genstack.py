@@ -134,7 +134,7 @@ def stack_build(image, size, ra, dec, intense, mywcs, scale, save, maxnoise,
         @param dec:                     Declination of source
         @type intense:          float
         @param intense:         Stokes I intensity of the source
-        @type mywcs:                      AstWCS.WCS
+        @type mywcs:                      WCS
         @param mywcs:                     WCS for the source image
         @type scale:            int or None
         @param scale:           The scale factor for regridding
@@ -200,7 +200,7 @@ def headerize(image):
         @param image:   The FITS image of the stacked results
         @returns:               The pyfits image with the proper header values included
         """
-        # These values are used due to a bug in the astlib scale, so my own scale
+        # These values are used due to a bug in the scale, so my own scale
         # bzero and bscale values must be internally calculated.
         scalingfactor = 0.000001
         maxintvalue = 4294967294
@@ -392,7 +392,7 @@ if __name__ == "__main__":
                 try:
                         image = fits.open(arg)
                         # Load and preserve the wcs data once for each source rather than
-                        # once per stamp, as the astWCS.WCS constructor is very slow.
+                        # once per stamp, as the WCS constructor is very slow.
                         units = image[0].header["BUNIT"]
                         mywcs = wcs.WCS(image[0].header)
                         try:
