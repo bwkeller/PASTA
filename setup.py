@@ -7,6 +7,7 @@ setup(name='PASTA',
         description='Python Astronomical Stacking Tool Array',
         author='Ben Keller',
         author_email='malzraa@gmail.com',
-        py_modules=['stampy', 'stacky']
+        py_modules=['stampy', 'stacky'],
+        scripts=['genstack']
         )
 
